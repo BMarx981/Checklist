@@ -10,6 +10,27 @@ import UIKit
 
 class AllListsViewController: UITableViewController {
 
+    var lists: [Checklist]
+    
+    required init?(coder aDecoder: NSCoder) {
+        lists = [Checklist]()
+        
+        super.init(coder: aDecoder)
+        
+        var list = Checklist(name: "Birthdays")
+        lists.append(list)
+        
+        list = Checklist(name: "Groceries")
+        lists.append(list)
+        
+        list = Checklist(name: "Cool Apps")
+        lists.append(list)
+        
+        list = Checklist(name: "To Do")
+        lists.append(list)
+    }
+    
+    
     override func viewDidLoad() {
         super.viewDidLoad()
 
@@ -28,14 +49,16 @@ class AllListsViewController: UITableViewController {
     // MARK: - Table view data source
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         // #warning Incomplete implementation, return the number of rows
-        return 3
+        return lists.count
     }
 
     
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-
         let cell = makeCell(for: tableView)
-        cell.textLabel!.text = "List \(indexPath.row)"
+        
+        let checklist = lists[indexPath.row]
+        cell.textLabel!.text = checklist.name
+        cell.accessoryType = .detailDisclosureButton
         return cell
     }
     
@@ -48,14 +71,19 @@ class AllListsViewController: UITableViewController {
         }
     }
     
-
+    override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        let checklist = lists[indexPath.row]
+        performSegue(withIdentifier: "ShowChecklist", sender: nil)
+    }
+    
     /*
     // Override to support conditional editing of the table view.
     override func tableView(_ tableView: UITableView, canEditRowAt indexPath: IndexPath) -> Bool {
         // Return false if you do not want the specified item to be editable.
         return true
     }
-    */
+ */
+ 
 
     /*
     // Override to support editing the table view.
@@ -84,14 +112,18 @@ class AllListsViewController: UITableViewController {
     }
     */
 
-    /*
+    
     // MARK: - Navigation
 
     // In a storyboard-based application, you will often want to do a little preparation before navigation
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        if segue.identifier == "ShowChecklist" {
+            let controller = segue.destination as! ChecklistViewController
+            controller.checklist = sender as! Checklist
+        }
         // Get the new view controller using segue.destinationViewController.
         // Pass the selected object to the new view controller.
     }
-    */
+ 
 
 }

@@ -12,10 +12,11 @@ class ChecklistViewController: UITableViewController, ItemDetailViewControllerDe
     
     //items array is the data model
     var items: [ChecklistItem]
+    var checklist: Checklist!
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        // Do any additional setup after loading the view, typically from a nib.
+        title = checklist.name
     }
 
     override func didReceiveMemoryWarning() {
@@ -28,39 +29,6 @@ class ChecklistViewController: UITableViewController, ItemDetailViewControllerDe
         super.init(coder: aDecoder)
         loadChecklistItems()
         
-//        let row0item = ChecklistItem()
-//        row0item.text = "Walk the dog"
-//        row0item.checked = false
-//        items.append(row0item)
-//        
-//        let row1item = ChecklistItem()
-//        row1item.text = "Brush my teeth"
-//        row1item.checked = true
-//        items.append(row1item)
-//        
-//        let row2item = ChecklistItem()
-//        row2item.text = "Learn iOS Development"
-//        row2item.checked = true
-//        items.append(row2item)
-//        
-//        let row3item = ChecklistItem()
-//        row3item.text = "Soccer Practice"
-//        row3item.checked = true
-//        items.append(row3item)
-//        
-//        let row4item = ChecklistItem()
-//        row4item.text = "Eat ice cream"
-//        row4item.checked = true
-//        items.append(row4item)
-//        
-//        let row5item = ChecklistItem()
-//        row5item.text = "Take out trash"
-//        row5item.checked = false
-//        items.append(row5item)
-//        
-//        super.init(coder: aDecoder)
-//        print("Documents folder is \(documentsDirectory())")
-//        print("Data file path is \(dataFilePath())")
     }
     
     func loadChecklistItems() {
