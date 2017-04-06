@@ -11,6 +11,7 @@ import UIKit
 class Checklist: NSObject {
 
     var name = ""
+    var items = [Checklist]()
     init(name: String) {
         self.name = name
         super.init()
