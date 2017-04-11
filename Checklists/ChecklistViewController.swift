@@ -12,9 +12,11 @@ class ChecklistViewController: UITableViewController, ItemDetailViewControllerDe
     
     //items array is the data model
     var items: [ChecklistItem]
+    var checklist: Checklist!
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        title = checklist.name
         // Do any additional setup after loading the view, typically from a nib.
     }
 
@@ -27,40 +29,6 @@ class ChecklistViewController: UITableViewController, ItemDetailViewControllerDe
         items = [ChecklistItem]()
         super.init(coder: aDecoder)
         loadChecklistItems()
-        
-//        let row0item = ChecklistItem()
-//        row0item.text = "Walk the dog"
-//        row0item.checked = false
-//        items.append(row0item)
-//        
-//        let row1item = ChecklistItem()
-//        row1item.text = "Brush my teeth"
-//        row1item.checked = true
-//        items.append(row1item)
-//        
-//        let row2item = ChecklistItem()
-//        row2item.text = "Learn iOS Development"
-//        row2item.checked = true
-//        items.append(row2item)
-//        
-//        let row3item = ChecklistItem()
-//        row3item.text = "Soccer Practice"
-//        row3item.checked = true
-//        items.append(row3item)
-//        
-//        let row4item = ChecklistItem()
-//        row4item.text = "Eat ice cream"
-//        row4item.checked = true
-//        items.append(row4item)
-//        
-//        let row5item = ChecklistItem()
-//        row5item.text = "Take out trash"
-//        row5item.checked = false
-//        items.append(row5item)
-//        
-//        super.init(coder: aDecoder)
-//        print("Documents folder is \(documentsDirectory())")
-//        print("Data file path is \(dataFilePath())")
     }
     
     func loadChecklistItems() {
@@ -91,13 +59,7 @@ class ChecklistViewController: UITableViewController, ItemDetailViewControllerDe
     //toggles the checkmark on off. It is a delegate method.
     override func tableView(_  tableView: UITableView,
                             didSelectRowAt indexPath: IndexPath) {
-        if let cell = tableView.cellForRow(at: indexPath) {
-            let item = items[indexPath.row]
-            item.toggleChecked()
-            configureCheckmark(for: cell, with: item)
-        }
-        tableView.deselectRow(at: indexPath, animated: true)
-        saveChecklistItems()
+        performSegue(withIdentifier: "ShowChecklist", sender: checklist)
     }
     
     //Deletes a row from the tableView
@@ -154,17 +116,9 @@ class ChecklistViewController: UITableViewController, ItemDetailViewControllerDe
     }
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        if segue.identifier == "AddItem" {
-            let navigationController = segue.destination as! UINavigationController
-            let controller = navigationController.topViewController as! ItemDetailViewController
-            controller.delegate = self
-        } else if segue.identifier == "EditItem" {
-            let navigationController = segue.destination as! UINavigationController
-            let controller = navigationController.topViewController as! ItemDetailViewController
-            controller.delegate = self
-            if let indexPath = tableView.indexPath(for: sender as! UITableViewCell) {
-                controller.itemToEdit = items[indexPath.row]
-            }
+        if segue.identifier == "ShowChecklist" {
+            let controller = segue.destination as! ChecklistViewController
+            controller.checklist = sender as! Checklist
         }
     }
     
