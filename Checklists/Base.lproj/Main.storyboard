@@ -22,7 +22,13 @@
                             <outlet property="delegate" destination="Uit-1L-BCY" id="YFS-bW-nul"/>
                         </connections>
                     </tableView>
-                    <navigationItem key="navigationItem" title="Checklists" id="XlU-O1-m2e"/>
+                    <navigationItem key="navigationItem" title="Checklists" id="XlU-O1-m2e">
+                        <barButtonItem key="rightBarButtonItem" systemItem="add" id="5ie-wr-gub">
+                            <connections>
+                                <segue destination="xMJ-Ls-p5l" kind="presentation" identifier="AddChecklist" id="9mU-Yg-AKp"/>
+                            </connections>
+                        </barButtonItem>
+                    </navigationItem>
                     <connections>
                         <segue destination="JFT-Rl-YaD" kind="show" identifier="ShowChecklist" id="teL-UP-Csd"/>
                     </connections>
@@ -89,7 +95,7 @@
         <scene sceneID="wO6-Gw-EEj">
             <objects>
                 <tableViewController id="d2B-4c-AFI" userLabel="Add Checklist" customClass="ListDetailViewController" customModule="Checklists" customModuleProvider="target" sceneMemberID="viewController">
-                    <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="static" style="plain" separatorStyle="default" rowHeight="44" sectionHeaderHeight="28" sectionFooterHeight="28" id="KOd-3o-xb7">
+                    <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="static" style="plain" separatorStyle="default" sectionIndexMinimumDisplayRowCount="1" rowHeight="44" sectionHeaderHeight="28" sectionFooterHeight="28" id="KOd-3o-xb7">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
@@ -132,7 +138,7 @@
                                 <action selector="cancel" destination="d2B-4c-AFI" id="MTy-y1-qsK"/>
                             </connections>
                         </barButtonItem>
-                        <barButtonItem key="rightBarButtonItem" enabled="NO" title="Done" id="XhF-cF-HFy" userLabel="Done">
+                        <barButtonItem key="rightBarButtonItem" enabled="NO" systemItem="done" id="XhF-cF-HFy" userLabel="Done">
                             <connections>
                                 <action selector="done" destination="d2B-4c-AFI" id="QOX-0c-tb5"/>
                             </connections>
@@ -151,7 +157,7 @@
         <!--Navigation Controller-->
         <scene sceneID="87v-f8-ewX">
             <objects>
-                <navigationController id="xMJ-Ls-p5l" sceneMemberID="viewController">
+                <navigationController storyboardIdentifier="ListDetailNavigationController" id="xMJ-Ls-p5l" sceneMemberID="viewController">
                     <navigationBar key="navigationBar" contentMode="scaleToFill" id="P7R-nT-N4f">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="44"/>
                         <autoresizingMask key="autoresizingMask"/>
