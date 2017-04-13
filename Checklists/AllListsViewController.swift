@@ -79,7 +79,7 @@ class AllListsViewController: UITableViewController, ListDetailViewControllerDel
         if segue.identifier == "ShowChecklist" {
             let controller = segue.destination as! ChecklistViewController
             controller.checklist = sender as! Checklist
-        } else if segue.identifier == "AddChecklist" {
+        } else if segue.identifier == "AddChecklist" { // this else if extends the delegate protocol
             let navigationController = segue.destination as! UINavigationController
             let controller = navigationController.topViewController as! ListDetailViewController
             controller.delegate = self
@@ -87,10 +87,12 @@ class AllListsViewController: UITableViewController, ListDetailViewControllerDel
         }
     }
     
-    func listDetailViewControllerDidCanel(_ controller: ListDetailViewController) {
+    //This is a ListDetailViewControllerDelegate method
+    func listDetailViewControllerDidCancel(_ controller: ListDetailViewController) {
         dismiss(animated: true, completion: nil)
     }
     
+    //This is a ListDetailViewControllerDelegate method
     func listDetailViewController(_ controller: ListDetailViewController, didFinishAdding checklist: Checklist) {
         let newRowIndex = lists.count
         lists.append(checklist)
@@ -102,6 +104,7 @@ class AllListsViewController: UITableViewController, ListDetailViewControllerDel
         dismiss(animated: true, completion: nil)
     }
     
+    //This is a ListDetailViewControllerDelegate method
     func listDetailViewController(_ controller: ListDetailViewController, didFinishEditing checklist: Checklist) {
         if let index = lists.index(of: checklist) {
             let indexPath = IndexPath(row: index, section: 0)
@@ -112,7 +115,7 @@ class AllListsViewController: UITableViewController, ListDetailViewControllerDel
         dismiss(animated: true, completion: nil)
     }
     
-    //Allows for editing a cell
+    //Allows for editing a cell namely delete the checklists by swiping
     override func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCellEditingStyle, forRowAt indexPath: IndexPath) {
         lists.remove(at: indexPath.row)
         
@@ -123,7 +126,7 @@ class AllListsViewController: UITableViewController, ListDetailViewControllerDel
     //Loads a storyboard through code
     override func tableView(_ tableView: UITableView, accessoryButtonTappedForRowWith indexPath: IndexPath) {
         //The view controller is embedded in the storyboard here.
-        let navigationController = storyboard!.instantiateViewController(withIdentifier: "ListDetailController") as! UINavigationController
+        let navigationController = storyboard!.instantiateViewController(withIdentifier: "ListDetailNavigationController") as! UINavigationController
         //describes the navigation controller to be used for the viewController
         let controller = navigationController.topViewController as! ListDetailViewController
         //makes the controller the delegate

@@ -9,7 +9,7 @@
 import UIKit
 
 protocol ListDetailViewControllerDelegate: class {
-    func listDetailViewControllerDidCanel(_ controller: ListDetailViewController)
+    func listDetailViewControllerDidCancel(_ controller: ListDetailViewController)
     func listDetailViewController(_ controller: ListDetailViewController, didFinishAdding checklist: Checklist)
     func listDetailViewController(_ controller: ListDetailViewController, didFinishEditing checklist: Checklist)
 }
@@ -33,7 +33,7 @@ class ListDetailViewController: UITableViewController, UITextFieldDelegate {
     }
     
     @IBAction func cancel() {
-        delegate?.listDetailViewControllerDidCanel(self)
+        delegate?.listDetailViewControllerDidCancel(self)
     }
     
     @IBAction func done() {
